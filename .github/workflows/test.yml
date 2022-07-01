@@ -24,8 +24,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - run: |
-          echo "Branch: $Branch"
-          echo "Environment: $RUNENV"
-        env:
-          Banch: ${{ inputs.Branch }}
-          RUNENVIRONMENT: ${{ inputs.RUNENV }}
+          echo "Branch: ${{ inputs.Branch }}"
+          echo "Environment: ${{ inputs.RUNENV }}"
+
