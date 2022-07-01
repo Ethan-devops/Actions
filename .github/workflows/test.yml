@@ -22,7 +22,7 @@ on:
         - us
 
 jobs:
-  log-the-inputs:
+  Build:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
@@ -34,4 +34,16 @@ jobs:
           echo "Branch: ${{ inputs.Branch }}"
           echo "Environment: ${{ inputs.RUNENV }}"
           cat ./*
+          
+  Deploy:
+    name: Deploy
+    needs: Build
+    runs-on: ubuntu-latest
+    steps:
+    - name: set deploy command from input
+      run: |
+        echo "deploy to ${{ inputs.RUNENV }}"
+      
+
+
 
