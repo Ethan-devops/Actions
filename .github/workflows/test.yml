@@ -1,34 +1,33 @@
-on:
-  push:
+on: 
   workflow_dispatch:
     inputs:
-      vmSku:
-        description: 'Virtual Machine SKU'     
+      logLevel:
+        description: 'Log level'     
         required: true
-        default: 'Standard_B2ms'
-      vmCount:
-        description: 'Virtual Machine Count'     
-        required: true
-        default: 2
+        default: 'warning' 
+        type: choice
+        options:
+        - info
+        - warning
+        - debug 
+      tags:
+        description: 'Test scenario tags'
+        required: false 
+        type: boolean
+      environment:
+        description: 'Environment to run；cn-dev or cn-qa'
+        type: choice
+        required: true 
 
 jobs:
-  setup:
-    name: Setup Azure VM
-    runs-on: windows-latest
+  log-the-inputs:
+    runs-on: ubuntu-latest
     steps:
-      - name: Azure CLI Login
-        uses: azure/login@v1
-        with:
-          creds: ${{ secrets.AZURE_CREDENTIALS }}
-          enable-AzPSSession: true
-
-      - name: Create virtual machine(s)
-        run: |
-          $vmSku = "${{ github.event.inputs.vmSku }}"
-          $vmCount = ${{ github.event.inputs.vmCount }}
-          az vm create --resource-group ${{ secrets.RESOURCE_GROUP }} `
-          --name "foobar" `
-          --count $vmCount `
-          --size $vmSku `
-          --image ubuntults `
-          --generate-ssh-ke
+      - run: |
+          echo "Log level: $LEVEL"
+          echo "Tags: $TAGS"
+          echo "Environment: $ENVIRONMENT"
+        env:
+          LEVEL: ${{ inputs.logLevel }}
+          TAGS: ${{ inputs.tags }}
+          ENVIRONMENT: ${{ inputs.environment }}
