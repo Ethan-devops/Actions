@@ -23,7 +23,7 @@ on:
 
 jobs:
   Build:
-    name: Build banch ${{ inputs.Branch }}
+    name: "Build Banch: ${{ inputs.Branch }}"
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
@@ -37,7 +37,7 @@ jobs:
           cat ./*
           
   Deploy:
-    name: Deploy ${{ inputs.RUNENV }}
+    name: "Deploy To: ${{ inputs.RUNENV }}"
     needs: Build
     runs-on: ubuntu-latest
     steps:
