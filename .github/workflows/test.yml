@@ -23,6 +23,7 @@ on:
 
 jobs:
   Build:
+    name: Build banch ${{ inputs.Branch }}
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
@@ -36,13 +37,13 @@ jobs:
           cat ./*
           
   Deploy:
-    name: Deploy
+    name: Deploy ${{ inputs.RUNENV }}
     needs: Build
     runs-on: ubuntu-latest
     steps:
     - name: set deploy command from input
       run: |
-        echo "deploy to ${{ inputs.RUNENV }}"
+        echo "deploy to c"
       
 
 
