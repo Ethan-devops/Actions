@@ -1,17 +1,13 @@
 name: Run-Workflow-Manually-DEV
 
-on: 
-  workflow_dispatch:
+on:
+  workflow_call:
     inputs:
-      logLevel:
-        description: 'Log level'
-        required: true
-        default: 'warning' 
-        type: choice
-        options:
-        - info
-        - warning
-        - debug 
+      username:
+        description: 'A username passed from the caller workflow'
+        default: 'john-doe'
+        required: false
+        type: string
 
 jobs:
   Build:
