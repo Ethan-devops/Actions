@@ -1,4 +1,4 @@
-name: Run-Workflow-Manually
+name: Run-Workflow-Manually-Dev
 
 on: 
   workflow_dispatch:
