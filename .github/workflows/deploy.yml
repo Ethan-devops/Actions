@@ -10,7 +10,6 @@ on:
         type: choice
         options:
         - dev
-        - qa
       RUNENV:
         description: 'select a environment to deploy '     
         required: true
@@ -18,8 +17,6 @@ on:
         type: choice
         options:
         - cn
-        - jp
-        - us
 
 jobs:
   Build:
