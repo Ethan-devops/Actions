@@ -1,0 +1,27 @@
+name: Run-Workflow-Manually-DEV
+
+on: 
+  workflow_dispatch:
+
+
+jobs:
+  Build:
+    name: "Build Banch: ${{ inputs.Branch }}"
+    runs-on: ubuntu-latest
+    steps:          
+      - run: |
+          echo "Branch: DEV"
+          echo "Environment: DEV"
+          cat ./*
+          
+  Deploy:
+    name: "Deploy To: ${{ inputs.RUNENV }}"
+    needs: Build
+    runs-on: ubuntu-latest
+    steps:
+    - name: set deploy 
+      run: |
+        echo "deploy to DEV"
+      
+
+
