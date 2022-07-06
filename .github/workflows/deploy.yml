@@ -1,0 +1,46 @@
+name: Run-Workflow-Manually-Dev
+
+on: 
+  workflow_dispatch:
+    inputs:
+      Branch:
+        description: 'select a branch to run workflow'     
+        required: true
+        default: 'dev' 
+        type: choice
+        options:
+        - dev
+      RUNENV:
+        description: 'select a environment to deploy '     
+        required: true
+        default: 'cn' 
+        type: choice
+        options:
+        - cn
+
+jobs:
+  Build:
+    name: "Build Banch: ${{ inputs.Branch }}"
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+        with: 
+          ref:  ${{ inputs.Branch }}
+          
+      - run: |
+          echo "Branch: ${{ inputs.Branch }}"
+          echo "Environment: ${{ inputs.RUNENV }}"
+          cat ./*
+          
+  Deploy:
+    name: "Deploy To: ${{ inputs.RUNENV }}"
+    needs: Build
+    runs-on: ubuntu-latest
+    steps:
+    - name: set deploy command from input
+      run: |
+        echo "deploy to c"
+      
+
+
