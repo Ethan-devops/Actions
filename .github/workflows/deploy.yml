@@ -9,17 +9,24 @@ on:
         default: 'dev' 
         type: choice
         options:
-        - dev
-        - qa
+        - CN-Dev
+        - CN-QA
+        - JP-Dev
+        - JP-QA
+        - US-Dev
+        - US-QA
       RUNENV:
         description: 'select a environment to deploy '     
         required: true
-        default: 'cn' 
+        default: 'cn-dev' 
         type: choice
         options:
-        - cn
-        - jp
-        - us
+        - cn-dev
+        - cn-qa
+        - jp-dev
+        - jp-qa
+        - us-dev
+        - us-qa
 
 jobs:
   Build:
